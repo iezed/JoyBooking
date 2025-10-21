@@ -1,5 +1,5 @@
 import sqlite3
-from bottle import route, run, template, request, redirect
+from bottle import route, run, template, request, redirect, static_file
 
 
 # --- Database Setup ---
@@ -82,6 +82,11 @@ def book():
 @route("/success")
 def success():
     return template("success.html")
+
+
+@route('/favicon.ico')
+def favicon():
+    return static_file('favicon.ico', root='static')
 
 
 # --- Main ---
