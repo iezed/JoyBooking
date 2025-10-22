@@ -14,11 +14,11 @@ This project is a simple web application for booking appointments, named "JoyBoo
 
 The application is a monolithic web application. It follows a simple structure:
 
-*   `app.py`: The main application file, containing the web server logic, routes, and database interactions. It uses `database.py` to manage the database.
+*   `app.py`: The main application file, containing the web server logic and routes. It uses `database.py` to manage the database.
 *   `database.py`: This file handles all the database operations, including initialization, and CRUD operations for services and bookings.
 *   `booking.db`: An SQLite database file that is created automatically by `database.py` to store services and reservations.
-*   `prenota.html`: The main HTML template for the booking form, located in the root directory.
 *   `views/`: This directory contains the HTML templates:
+    *   `booking.tpl`: The main HTML template for the booking form.
     *   `success.tpl`: A simple success page shown after a booking is made.
 *   `static/`: A directory for static assets:
     *   `css/`: Contains stylesheets:
