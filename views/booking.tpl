@@ -1,0 +1,43 @@
+% rebase('base.tpl', title='JoyBooking - Quick Salon Booking')
+<div class="container mt-5">
+  <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+          <div class="card shadow-sm">
+              <div class="card-body">
+                  <h1 class="card-title text-center mb-4">Book Your Appointment</h1>
+                  <form action="/book" method="post">
+                      <div class="mb-3">
+                          <label for="client_name" class="form-label">Full Name</label>
+                          <input type="text" class="form-control" id="client_name" name="client_name" required>
+                      </div>
+                      <div class="mb-3">
+                          <label for="client_phone" class="form-label">Phone Number</label>
+                          <input type="tel" class="form-control" id="client_phone" name="client_phone" required>
+                      </div>
+                      <div class="mb-3">
+                          <label for="service_id" class="form-label">Select Service</label>
+                          <select class="form-select" id="service_id" name="service_id" required>
+                              <option value="" disabled selected>Choose a service...</option>
+                              % for service in services:
+                              <option value="{{service[0]}}">{{service[1]}} - {{service[2]}} min</option>
+                              % end
+                          </select>
+                      </div>
+                      <div class="mb-3">
+                          <label for="slot" class="form-label">Available Time Slots</label>
+                          <select class="form-select" id="slot" name="slot" required>
+                              <option value="" disabled selected>Choose a time...</option>
+                              % for slot in slots:
+                              <option value="{{slot}}">{{slot}}</option>
+                              % end
+                          </select>
+                      </div>
+                      <div class="d-grid">
+                          <button type="submit" class="btn btn-primary">Book Now</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

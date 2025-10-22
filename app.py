@@ -1,3 +1,4 @@
+import os
 import sqlite3
 import logging
 from bottle import route, run, template, request, redirect, static_file
@@ -60,6 +61,17 @@ def get_time_slots():
     return slots
 
 
+@route('/static/<filepath:path>')
+def server_static(filepath):
+    root_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
+    return static_file(filepath, root=root_path)
+
+
+@route('/favicon.ico')
+def favicon():
+    return static_file('favicon.ico', root='static')
+
+
 # --- Routes ---
 @route('/')
 def index():
@@ -101,17 +113,11 @@ def book():
 
 @route('/success')
 def success():
-    logging.info('Success page accessed.')
-    return template('success.html')
-
-
-@route('/favicon.ico')
-def favicon():
-    return static_file('favicon.ico', root='static')
+    return template('success', title='JoyBooking - Quick Salon Booking Success')
 
 
 # --- Main ---
 if __name__ == '__main__':
     init_db()
     logging.info('Starting server at http://localhost:8080')
-    run(host='localhost', port=8080, debug=True)
+    run(host='localhost', port=8080, debug=True, reloader=True)

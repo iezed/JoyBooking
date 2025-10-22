@@ -12,14 +12,20 @@ This project is a simple web application for booking appointments, named "JoyBoo
 
 **Architecture:**
 
-The application is a monolithic web application contained in a single Python file, `app.py`. It follows a simple structure:
+The application is a monolithic web application. It follows a simple structure:
 
 *   `app.py`: The main application file, containing the web server logic, routes, and database interactions.
-*   `bottle.py`: The Bottle framework is included directly in the repository, making the project self-contained.
 *   `booking.db`: An SQLite database file that is created automatically to store services and reservations.
-*   `prenota.html`: The main HTML template for the booking form.
-*   `success.html`: A simple success page shown after a booking is made.
-*   `static/`: A directory for static assets, such as the favicon.
+*   `views/`: This directory contains the HTML templates:
+    *   `prenota.html`: The main HTML template for the booking form.
+    *   `success.html`: A simple success page shown after a booking is made.
+*   `static/`: A directory for static assets:
+    *   `css/`: Contains stylesheets:
+        *   `app.css`: Custom application styles.
+        *   `bootstrap.min.css`: Bootstrap 5 framework.
+    *   `js/`: Contains JavaScript files:
+        *   `bootstrap.bundle.min.js`: Bootstrap 5 JavaScript bundle.
+    *   `favicon.ico`: The favicon for the application.
 
 ## Building and Running
 
@@ -35,7 +41,7 @@ This will start a development web server on `http://localhost:8080`.
 
 **Dependencies:**
 
-The project has no external dependencies that need to be installed, as the `bottle.py` framework is included in the repository.
+The project's primary dependency is the Bottle framework.
 
 ## Development Conventions
 
