@@ -1,7 +1,26 @@
+/* Add a light background to the entire page */
 body {
+  background-color: #f8f9fa;
+}
+
+/* Center only the success page */
+.success-center {
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background-color: #f8f9fa;
+  padding: 1.5rem;
+}
+
+/* Limit card width to prevent the title from wrapping */
+.success-center .card {
+  width: 100%;
+  max-width: 720px;
+  /* increase if you want space for the title */
+}
+
+/* Extra inner margin for small screens */
+.success-center .container {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }

@@ -37,7 +37,14 @@ def index():
     logging.info('Main page accessed.')
     try:
         services = get_services()
-        return template('prenota.html', services=services, slots=get_time_slots())
+        # return template('prenota.html', services=services, slots=get_time_slots())
+        return template(
+            'booking',
+            title='JoyBooking - Quick Salon Booking Success',
+            services=services,
+            slots=get_time_slots(),
+        )
+
     except Exception as e:
         logging.error(f'Error fetching services for index page: {e}')
         return 'Error loading page. Please try again later.'
