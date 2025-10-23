@@ -1,7 +1,8 @@
 import os
 import logging
+import math
 from bottle import route, run, template, request, redirect, static_file
-from database import init_db, get_services, create_booking
+from database import init_db, get_services, create_booking, get_bookings_paginated
 
 # --- Logging Setup ---
 logging.basicConfig(
@@ -67,6 +68,23 @@ def book():
 @route('/success')
 def success():
     return template('success', title='JoyBooking - Quick Salon Booking Success')
+
+
+@route('/bookings')
+def bookings_grid():
+    """Displays a paginated grid of bookings."""
+    page = int(request.query.get('page', 1))
+    per_page = 10
+    bookings, total_bookings = get_bookings_paginated(page, per_page)
+    total_pages = math.ceil(total_bookings / per_page)
+
+    return template(
+        'bookings_grid',
+        bookings=bookings,
+        current_page=page,
+        total_pages=total_pages,
+        title='JoyBooking - Bookings',
+    )
 
 
 # --- Main ---

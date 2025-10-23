@@ -79,3 +79,36 @@ def create_booking(client_name, client_phone, service_id, slot, db_path=DATABASE
     except Exception as e:
         logging.error(f'Error creating booking for {client_name}: {e}')
         return False
+
+
+def get_bookings_paginated(page, per_page, db_path=DATABASE_PATH):
+    """Fetches bookings from the database with pagination."""
+    # oldqyr='SELECT client_name, client_phone, slot FROM Reservations ORDER BY slot DESC LIMIT ? OFFSET ?'
+    query = """
+        SELECT c.client_name,c.client_phone,c.slot,
+            s.name AS service_name
+        FROM Reservations AS c
+        JOIN Services AS s ON c.service_id = s.id
+        ORDER BY slot DESC LIMIT ? OFFSET ?"""
+    try:
+        # sanitize inputs
+        page = int(page) if page is not None else 1
+        per_page = int(per_page) if per_page is not None else 10
+        if page < 1:
+            page = 1
+        if per_page < 1:
+            per_page = 10
+
+        offset = (page - 1) * per_page
+
+        with closing(get_db_connection(db_path)) as conn:
+            c = conn.cursor()
+            # offset = (page - 1) * per_page
+            c.execute(query, (per_page, offset))
+            bookings = c.fetchall()
+            c.execute('SELECT COUNT(*) FROM Reservations')
+            total_bookings = c.fetchone()[0]
+            return bookings, total_bookings
+    except Exception as e:
+        logging.error(f'Error fetching bookings: {e}')
+        return [], 0
